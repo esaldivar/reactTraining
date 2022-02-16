@@ -1,27 +1,33 @@
-import React, {useState} from 'react';
-import Small from './Small.jsx'
-
-
-
-let number = 1;
-
-
+import React, {useState, useEffect, useRef} from 'react';
 
 const App = (props) => {
-    const newNumber = number + 3;
-    const [numberState, setNumberState] = useState(number + 3)
-    const subtractNum = (num) => {
-       if(num == 0 ){
-           return num;
-       };
-       return num - 1;
-    }
-
+    //enter a form and hit submit on a button and then it will make a div appear with a value
+    const [form, changeForm] =useState({
+        inputName: "",
+        submittedName: ""
+    })
+ 
     return (
         <div>
-            <button onClick={()=>{setNumberState(numberState + 1)}}>Increase number</button>
-            <button onClick={()=>{setNumberState(subtractNum(numberState))}}>Decrease number</button>
-            <Small number={numberState}/>
+            <form onSubmit={(event)=>{
+                event.preventDefault()
+                changeForm({
+                    ...form,
+                    submittedName: form.inputName
+                })
+                }}>
+                <label>
+                Name:
+                    <input type="text" name="name" value={form.inputName} onChange={(e)=>{changeForm({
+                        ...form,
+                        inputName: e.target.value
+                    })}}/>
+                </label>
+                    <input type="submit" value="Submit" />
+            </form>
+            {form.submittedName.length > 0 &&
+            <h1>{form.submittedName}</h1>
+            }
         </div>
     )
 
