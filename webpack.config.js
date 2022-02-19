@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     mode: 'development',
-	entry: path.resolve(__dirname,'index.js'),
+	entry: path.resolve(__dirname,'./src/index.js'),
 	resolve: {
 		extensions: ['.js', '.jsx'],
 	},
@@ -43,7 +43,13 @@ module.exports = {
 			template: path.resolve(__dirname,'index.html'),
 		}),
 	],
-	devServer: {
-		static: './build',
-	  },
-}
+
+		devServer: {
+			publicPath: '/build/',
+			proxy: {
+			  '/api': 'http://localhost:3000',
+			},
+			hot: true,
+			historyApiFallback: true,
+		  },
+};
