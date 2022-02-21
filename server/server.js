@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const path = require('path');
-// const routes = require('./routes');
+const routes = require('./routes/router');
 const cors = require('cors');
 const  port  = 3000;
 
@@ -17,10 +17,7 @@ app.get('/', (req, res) =>
 
 app.use('/build', express.static(path.resolve(__dirname, '../build')));
 
- app.use('/api', (req, res)=>{
-
-    return res.send('hello from the server')
-});
+ app.use('/api', routes);
 
 // Error Handlers
 app.use((req, res) =>
