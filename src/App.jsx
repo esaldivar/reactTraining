@@ -5,23 +5,24 @@ const App = (props) => {
     //enter a form and hit submit on a button and then it will make a div appear with a value
     const [form, changeForm] =useState({
         inputName: "",
-        submittedName: "",
-        serverResponse: ""
+        submittedName: ""
     })
 
     useEffect(()=>{
-        axios.get('/api')
+        axios.get('/api/axiosTrial')
         .then((res)=>{
-            console.log(res.data);
-            changeForm({
-                ...form,
-                serverResponse: res.data
-            })
+            console.log(res);
         }).catch((err)=>{
             console.log(err);
         })
 
     },[])
+
+    const axiosTrial = () => {
+        axios.get('/api/axiosTrial')
+    }
+
+
  
     return (
         <div>
@@ -44,7 +45,6 @@ const App = (props) => {
             {form.submittedName.length > 0 &&
             <h1>{form.submittedName}</h1>
             }
-            <h1>{form.serverResponse}</h1>
         </div>
     )
 
