@@ -1,3 +1,14 @@
 .apple {
     color: red;
 }
+
+.articleParent {
+    background-color: aqua;
+    height: 100px;
+    display: flex;
+}
+
+.articleChild {
+    background-color: darkkhaki;
+    margin: 0 auto;
+}
